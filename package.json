@@ -1,0 +1,22 @@
+{
+  "name": "twiddit",
+  "version": "1.0.0",
+  "description": "twitter and reddit api client",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "download": "^7.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "json2csv": "^4.2.1",
+    "mysql": "^2.16.0",
+    "oauth": "^0.9.5",
+    "request": "^2.88.0"
+  }
+}

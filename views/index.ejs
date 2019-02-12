@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <title>Twiddit Client</title>
+  </head>
+  <body><br><br><br>
+    <div class="container">
+
+  <div class="row">
+  
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Twitter</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Reddit</a>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="tab-content" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        
+        <div class="row">
+
+          <div class="col-md-6">
+          <form action="/" method="post">
+            <div class="form-row align-items-center">
+
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                  </div>
+                  <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username" name="textusername" pattern="^\S+$" oninvalid="setCustomValidity('I have never seen a Twitter username with space on it. Have you ?')"
+    onchange="try{setCustomValidity('')}catch(e){}" required>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2" name="buttonusername" value="ButtonResponseOne">Search</button>
+              </div>
+            </div>
+          </form>
+          </div>
+
+
+          <div class="col-md-6">
+            <form action="/" method="post">
+          <div class="form-row align-items-center">
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Hashtag</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">#</div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Hashtag" name="texthashtag" pattern="^\S+$" oninvalid="setCustomValidity('I have never seen a Twitter hashtag with space on it. Have you ?')"
+    onchange="try{setCustomValidity('')}catch(e){}" required>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2" name="buttonhashtag" value="ButtonResponseTwo">Search</button>
+            </div>
+          </div>
+        </form>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <br>
+
+          <% for(var i=0; i < locals.count; i++) { %>
+            <% if(tweet_data_full.tweet_content[i].tweet_username !== null){ %>
+          <div class="col-md-6">
+          <div class="card">
+            <h5 class="card-header">@<%= tweet_data_full.tweet_content[i].tweet_username %></h5>
+            <div class="card-body">
+              <p class="card-text"><%= tweet_data_full.tweet_content[i].tweet_text %></p>
+              <a href="<%= tweet_data_full.tweet_content[i].tweet_url %>" class="btn btn-primary" target="_blank">Go To Tweet</a>
+            </div>
+          </div>
+          <br>
+          </div>
+          <% } %>
+          <% } %>
+      </div>
+
+        <div class="row">
+          
+        <br>
+
+
+        
+        <% for(var i=0; i < locals.hash_count; i++) { %>
+          <% if(hash_data_full.hash_content[i].hash_username !== null){ %>
+          <div class="col-md-6">
+        <div class="card">
+          <h5 class="card-header">@<%= hash_data_full.hash_content[i].hash_username %></h5>
+          <div class="card-body">
+            <p class="card-text"><%= hash_data_full.hash_content[i].hash_text %></p>
+            <a href="<%= hash_data_full.hash_content[i].hash_url %>" class="btn btn-primary" target="_blank">Go To Tweet</a>
+          </div>
+        </div>
+        <br>
+        </div>
+        <% } %>
+        <% } %>
+
+
+
+        </div>
+
+      </div>
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+      <!-- Reddit Search -->
+        <div class="row">
+
+          <div class="col-md-6">
+            <form action="/" method="post">
+              <div class="form-row align-items-center">
+
+                <div class="col-auto">
+                  <label class="sr-only" for="inlineFormInputGroup">Search</label>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">ø</div>
+                    </div>
+                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" name="redditsearchtext">
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-2" name="redditsearchbutton" value="ButtonResponseThree">Search</button>
+                </div>
+              </div>
+            </form>
+            <br>
+
+            <% for(var i=0; i < locals.thread_count; i++) { %>
+            <% if(thread_data_full.thread_content[i].reddit_author !== null){ %>
+            <div class="card">
+            <strong><h5 class="card-header">@<%= thread_data_full.thread_content[i].reddit_author %></h5></strong>
+            <p><%= thread_data_full.thread_content[i].reddit_title %></p>
+            <div class="card-body">
+            <p class="card-text"><strong><%= thread_data_full.thread_content[i].subreddit %></strong></p>
+            <p class="card-text"><%= thread_data_full.thread_content[i].reddit_fulltext %></p>
+            <p class="card-text"><%= thread_data_full.thread_content[i].reddit_author %></p>
+          </div>
+            <a href="<%= thread_data_full.thread_content[i].reddit_url %>" class="btn btn-primary" target="_blank">Go To Thread</a>
+          </div><br>
+        <% } %>
+        <% } %>
+
+          </div>
+
+        </div>
+
+<!-- Reddit Search End -->
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  </body>
+</html>
